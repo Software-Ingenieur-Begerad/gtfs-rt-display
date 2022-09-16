@@ -13,7 +13,7 @@ const Contact = () => {
             <p>
         Source code has been made public on{' '}
                 <a
-                    href="https://github.com/Software-Ingenieur-Begerad/gtfs-display"
+                    href="https://github.com/Software-Ingenieur-Begerad/gtfs-rt-display"
                     target="_blank"
                 >
           GitHub

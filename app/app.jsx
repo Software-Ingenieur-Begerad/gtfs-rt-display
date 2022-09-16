@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Contact from './pages/contact';
 import Home from './pages/home';
+import Map from './pages/map-page';
 import NavBar from './components/nav-bar';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <NavBar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/map" element={<Map />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
         </BrowserRouter>
