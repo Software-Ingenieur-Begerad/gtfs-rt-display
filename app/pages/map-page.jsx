@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 
 import Map from '../components/map/map';
-
+import parseMessages from '../utils/gtfs-rt-utils';
 export default function MapPage() {
+    /*storage*/
+    const [vehPos, setVehPos] = useState([]);
     const getData= async ()=>{
 	console.log('getData() start...');
         try {
@@ -17,18 +19,22 @@ export default function MapPage() {
 					});
 	    //TODO remove debugging
             if(res.data){
-                console.log('getVehPos() res available');
+                //console.log('getVehPos() res available');
+		/*parse messages*/
+		const messages = parseMessages(res.data);
+                console.log('getVehPos() messages.length: '+messages.length);
+		/*set state*/
+		setVehPos(messages);
 	    }else{
-                console.log('getVehPos() res NOT available');
+                console.error('getVehPos() res NOT available');
 	    }
         } catch (err) {
             console.error('err.message: ' + err.message);
         }
-	console.log('getData() done.');
+	//console.log('getData() done.');
     };
     useEffect(()=>{
 	const intervalCall=setInterval(()=>{
-	    console.log('Map: get data');
 	    getData();
 	}, 5000);
 	return ()=>{
@@ -40,7 +46,7 @@ export default function MapPage() {
 	<>
 	    {/*TODO remove debugging*/}
 	    <h1>MapPage</h1>
-	    <Map />
+	    <Map messages={vehPos}/>
 	</>
     );
 }

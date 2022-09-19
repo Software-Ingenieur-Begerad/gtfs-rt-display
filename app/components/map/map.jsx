@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {MapContainer,TileLayer} from 'react-leaflet';
 /*JS module import (vs cdn or style link)*/
 import 'leaflet/dist/leaflet.css'
 import './map.css';
-export default function Map() {
+
+import MsgMarker from './marker-msg';
+
+export default function Map({messages}) {
     const position = [53.2206976, 7.7585528]
     return (
 	<>
@@ -14,7 +18,16 @@ export default function Map() {
 		    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 		/>
+		{
+		    messages.map(function(value,key) {
+			//console.log(`key: ${key}, value: ${value}`);
+			return <MsgMarker key={key} index={key} location={value}/>;
+                    })
+		}
 	    </MapContainer>
 	</>
     );
 }
+Map.propTypes = {
+    messages: PropTypes.array
+};
