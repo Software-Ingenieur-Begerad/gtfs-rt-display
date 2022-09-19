@@ -21,7 +21,7 @@ export default function Map({messages}) {
 		{
 		    messages.map(function(value,key) {
 			//console.log(`key: ${key}, value: ${value}`);
-			return <MsgMarker key={key} index={key} location={value}/>;
+			return <MsgMarker key={key} index={key} message={value}/>;
                     })
 		}
 	    </MapContainer>

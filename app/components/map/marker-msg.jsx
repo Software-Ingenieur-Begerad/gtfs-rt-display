@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Marker,Popup} from 'react-leaflet';
 import bfly from '../../assets/Logo_SIB_electricindigo.svg';
-const MarkerMsg = ({ index,location }) => {
+const MarkerMsg = ({ index,message }) => {
     const iconBfly = new L.Icon({
 	iconUrl: bfly,
 	iconRetinaUrl: bfly,
@@ -13,11 +13,13 @@ const MarkerMsg = ({ index,location }) => {
 	<>
 	    <Marker
 		index={index}
-		position={[location.lat,location.lon]}
+		position={[message.lat,message.lon]}
 		icon={iconBfly}
 	    >
 		<Popup>
-		    Popup
+		    route id: {message.routeId}
+		    ts creation: {message.tsMsgCreation}
+		    ts reception; {message.tsMsgReception}		    
 		</Popup>
 	    </Marker>
 	</>
@@ -28,5 +30,5 @@ export default MarkerMsg;
 
 MarkerMsg.propTypes = {
     index: PropTypes.number,
-    location: PropTypes.object
+    message: PropTypes.object
 };

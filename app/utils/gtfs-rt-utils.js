@@ -8,7 +8,14 @@ export default function parseMessages(buffer){
     const messages = [];
     const pbf = new Pbf(buffer);
     const feed = FeedMessage.read(pbf);
-    let gtfs_realtime_version, incrementality, timestamp = null;
+
+    /*Version of the feed specification. The current version is 2.0.*/
+    let gtfs_realtime_version;
+
+    let incrementality;
+
+    /*This timestamp identifies the moment when the content of this feed has been created (in server time). In POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). To avoid time skew between systems producing and consuming realtime information it is strongly advised to derive timestamp from a time server. It is completely acceptable to use Stratum 3 or even lower strata servers since time differences up to a couple of seconds are tolerable.*/
+    let timestamp = null;
     if (feed.header) {
 	//console.log('getVehPos() header available');
 	gtfs_realtime_version=feed.header.gtfs_realtime_version;
@@ -59,10 +66,14 @@ export default function parseMessages(buffer){
 		let lonFormed = longitude.toString().replace(/\.+$/, "");
 		lonFormed=charIntoString(lonFormed,lonFormed.length - 7,'.');
 		//console.log(`getVehPos() lonFormed:${lonFormed}`);
+		const now= new Date();
 		const message={
 		    headerGtfsRealtimeVersion: gtfs_realtime_version === undefined ? -1 : parseInt(gtfs_realtime_version,10) || -2,
 		    headerIncrementality: incrementality === undefined ? -1 : parseInt(incrementality,10) || -2,
-		    headerTimestamp : timestamp === undefined ? -1 : parseInt(timestamp,10) || -2,
+		    /*ts msg creation at server in s*/
+		    tsMsgCreation: timestamp === undefined ? -1 : parseInt(timestamp,10) || -2,
+		    /*ts msg reception at client in ms and convert to s*/
+		    tsMsgReception: Math.floor(now.getTime() / 1000),
 		    routeId: route_id === undefined ? -1 : parseInt(route_id,10) || -2,
 		    lat: latFormed === undefined ? -360 : latFormed,
 		    lon: lonFormed === undefined ? -720 : lonFormed,
