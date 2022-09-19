@@ -13,7 +13,7 @@ export default function Map({messages}) {
 	<>
 	    {/*TODO remove debugging*/}
 	    <h1>Map</h1>
-	    <MapContainer center={position} zoom={7} scrollWheelZoom={false}>
+	    <MapContainer center={position} zoom={6} scrollWheelZoom={false}>
 		<TileLayer
 		    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

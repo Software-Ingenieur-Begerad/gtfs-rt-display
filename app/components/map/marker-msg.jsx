@@ -17,9 +17,16 @@ const MarkerMsg = ({ index,message }) => {
 		icon={iconBfly}
 	    >
 		<Popup>
-		    route id: {message.routeId}
-		    ts creation: {message.tsMsgCreation}
-		    ts reception; {message.tsMsgReception}		    
+		    id: {message.id} <br/>
+		    vehicle id: {message.vehicleId} <br/>
+		    route id: {message.routeId} <br/>
+		    ts creation vehicle: {message.tsMsgCreationVehicle} <br/>
+		    ts creation ITCS: {message.tsMsgCreationItcs} <br/>
+		    ts reception client; {message.tsMsgReception} <br/>
+		    trip id: {message.tripId} <br/>
+		    route id: {message.routeId} <br/>
+		    lat: {message.lat} <br/>
+		    lon: {message.lon} <br/>
 		</Popup>
 	    </Marker>
 	</>
