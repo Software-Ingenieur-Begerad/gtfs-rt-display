@@ -7,7 +7,7 @@ export default function MapPage() {
     /*storage*/
     const [vehPos, setVehPos] = useState([]);
     const getData= async ()=>{
-	console.log('getData() start...');
+	//console.log('getData() start...');
         try {
             /*TODO handle errors: https://www.valentinog.com/blog/await-react/*/
             let url = 'https://soll.vbn.de/vehicle-positions';
@@ -22,7 +22,8 @@ export default function MapPage() {
                 //console.log('getVehPos() res available');
 		/*parse messages*/
 		const messages = parseMessages(res.data);
-                console.log('getVehPos() messages.length: '+messages.length);
+                //console.log('getVehPos() messages.length: '+messages.length);
+
 		/*set state*/
 		setVehPos(messages);
 	    }else{
@@ -44,8 +45,6 @@ export default function MapPage() {
     },[]);
     return (
 	<>
-	    {/*TODO remove debugging*/}
-	    <h1>MapPage</h1>
 	    <Map messages={vehPos}/>
 	</>
     );

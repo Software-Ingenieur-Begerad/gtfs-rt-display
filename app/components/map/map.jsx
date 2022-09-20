@@ -11,8 +11,6 @@ export default function Map({messages}) {
     const position = [53.2206976, 7.7585528]
     return (
 	<>
-	    {/*TODO remove debugging*/}
-	    <h1>Map</h1>
 	    <MapContainer center={position} zoom={6} scrollWheelZoom={false}>
 		<TileLayer
 		    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

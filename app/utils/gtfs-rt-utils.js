@@ -4,26 +4,12 @@ import { FeedMessage } from './gtfs-rt.js';
 import charIntoString from './string';
 
 export default function parseMessages(buffer){
-    console.log('parseMessages() start...');
+    //console.log('parseMessages() start...');
     const messages = [];
     const pbf = new Pbf(buffer);
     const feed = FeedMessage.read(pbf);
+    //console.log('parseMessages() feed:'+JSON.stringify(feed));
 
-    /*Version of the feed specification. The current version is 2.0.*/
-    let gtfs_realtime_version;
-
-    let incrementality;
-
-    /*This timestamp identifies the moment when the content of this feed has been created (in server time). In POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). To avoid time skew between systems producing and consuming realtime information it is strongly advised to derive timestamp from a time server. It is completely acceptable to use Stratum 3 or even lower strata servers since time differences up to a couple of seconds are tolerable.*/
-    let timestampFeed = null;
-    if (feed.header) {
-	//console.log('getVehPos() header available');
-	gtfs_realtime_version=feed.header.gtfs_realtime_version;
-	incrementality=feed.header.incrementality;
-	timestampFeed=feed.header.timestamp;
-    }else{
-	console.error('getVehPos() header NOT available');
-    }
     feed.entity.forEach(entity => {
 	/*Data about the realtime position of a vehicle.*/
 	const vehiclePos = entity.vehicle;
@@ -49,18 +35,18 @@ export default function parseMessages(buffer){
 	    //console.log(`getVehPos() lonFormed:${lonFormed}`);
 	    const now= new Date();
 	    const message={
-		headerGtfsRealtimeVersion: gtfs_realtime_version === undefined ? -1 : parseInt(gtfs_realtime_version,10) || -2,
+		/*Version of the feed specification. The current version is 2.0.*/
+		headerGtfsRealtimeVersion: feed.header.gtfs_realtime_version === undefined ? -1 : parseInt(feed.header.gtfs_realtime_version,10) || -2,
 		/*ts msg creation at vehicle in s*/
 		tsMsgCreationVehicle: vehPosTimestamp === undefined ? -1 : parseInt(vehPosTimestamp,10) || -2,
+		/*This timestamp identifies the moment when the content of this feed has been created (in server time). In POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). To avoid time skew between systems producing and consuming realtime information it is strongly advised to derive timestamp from a time server. It is completely acceptable to use Stratum 3 or even lower strata servers since time differences up to a couple of seconds are tolerable.*/
 		/*ts msg creation at ITCS in s*/
-		tsMsgCreationItcs: timestampFeed === undefined ? -1 : parseInt(timestampFeed,10) || -2,
+		tsMsgCreationItcs: feed.header.timestamp === undefined ? -1 : parseInt(feed.header.timestamp,10) || -2,
 		/*ts msg reception at client in ms and convert to s*/
 		tsMsgReception: Math.floor(now.getTime() / 1000),
 		/*Feed-unique identifier for this entity. The ids are used only to provide incrementality support.*/
-		//TODO Shall id be matched with IVU tenant?
 		id: entity.id === undefined ? -1 : parseInt(entity.id,10) || -2,
 		/*Internal system identification of the vehicle.*/
-		//TODO Shall id be matched with IVU vehicle id?
 		vehicleId: vehicle.id === undefined ? '' : vehicle.id,
 		/*The trip_id from the GTFS feed that this selector refers to.*/
 		tripId: trip.trip_id === undefined ? -1 : parseInt(trip.trip_id,10) || -2,
@@ -74,6 +60,6 @@ export default function parseMessages(buffer){
 	    console.error('getVehPos() vehiclePos NOT available');
 	}
     });
-    console.log('parseMessages() done.');
+    //console.log('parseMessages() done.');
     return messages;
 };

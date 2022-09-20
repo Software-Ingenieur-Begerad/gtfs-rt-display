@@ -19,11 +19,11 @@ const MarkerMsg = ({ index,message }) => {
 		<Popup>
 		    id: {message.id} <br/>
 		    vehicle id: {message.vehicleId} <br/>
-		    route id: {message.routeId} <br/>
 		    ts creation vehicle: {message.tsMsgCreationVehicle} <br/>
 		    ts creation ITCS: {message.tsMsgCreationItcs} <br/>
 		    ts reception client; {message.tsMsgReception} <br/>
 		    trip id: {message.tripId} <br/>
+		    trip destination: {message.tripDest} <br/>
 		    route id: {message.routeId} <br/>
 		    lat: {message.lat} <br/>
 		    lon: {message.lon} <br/>
