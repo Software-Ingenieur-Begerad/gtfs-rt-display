@@ -45,7 +45,7 @@ export default function parseMessages(buffer){
 		/*ts msg reception at client in ms and convert to s*/
 		tsMsgReception: Math.floor(now.getTime() / 1000),
 		/*Feed-unique identifier for this entity. The ids are used only to provide incrementality support.*/
-		id: entity.id === undefined ? -1 : parseInt(entity.id,10) || -2,
+		id: entity.id === undefined ? '' : entity.id,
 		/*Internal system identification of the vehicle.*/
 		vehicleId: vehicle.id === undefined ? '' : vehicle.id,
 		/*The trip_id from the GTFS feed that this selector refers to.*/

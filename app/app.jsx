@@ -18,7 +18,7 @@ export default function App() {
         <BrowserRouter>
             <NavBar />
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Map />} />
                 <Route path="/map" element={<Map />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
