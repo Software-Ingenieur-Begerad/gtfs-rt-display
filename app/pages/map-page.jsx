@@ -34,10 +34,16 @@ export default function MapPage() {
         }
 	//console.log('getData() done.');
     };
+
     useEffect(()=>{
+	/*do not wait the interval when component loads the first time*/
+	getData();
+
+	/*refresh data periodically*/
 	const intervalCall=setInterval(()=>{
 	    getData();
 	}, 5000);
+	/*TODO adjust interval, make it available via config file*/
 	return ()=>{
 	    /*clean up*/
 	    clearInterval(intervalCall);

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {Popup} from 'react-leaflet';
 
 import seconds2dmhs from '../../utils/seconds2dhms';
+import getRouteType from '../../utils/gtfs-route-type';
+
 const PopupMsg = ({index,message,ptByIfleet}) => {
     const vehicleAge=seconds2dmhs(Math.round(((Date.now()-message.tsMsgCreationVehicle*1000)/1000).toFixed(0)));
     const itcsAge=seconds2dmhs(Math.round(((Date.now()-message.tsMsgCreationItcs*1000)/1000).toFixed(0)));
@@ -10,7 +12,9 @@ const PopupMsg = ({index,message,ptByIfleet}) => {
     return (
 	<>
 	<Popup
-	    index={index}>
+	    index={index}
+	    key={index}
+	>
 	    id: {message.id} <br/>
 	    vehicle id: {message.vehicleId} <br/>
 	    creation time at vehicle: ts:{message.tsMsgCreationVehicle}, age:{vehicleAge} <br/>
@@ -21,7 +25,7 @@ const PopupMsg = ({index,message,ptByIfleet}) => {
 	    trip destination: {ptByIfleet.trip_headsign} <br/>
 	    route id: {ptByIfleet.route_id} <br/>
 	    route name: {ptByIfleet.route_short_name} <br/>
-	    route type: {ptByIfleet.route_type} <br/>
+	    route type: {ptByIfleet.route_type}({getRouteType(ptByIfleet.route_type)}) <br/>
 	    agency id: {ptByIfleet.agency_id} <br/>
 	    agency name: {ptByIfleet.agency_name} <br/>
 	    agency URL: {ptByIfleet.agency_url} <br/>
@@ -32,7 +36,6 @@ const PopupMsg = ({index,message,ptByIfleet}) => {
     );
 }
 export default PopupMsg;
-
 
 PopupMsg.propTypes = {
     index: PropTypes.number,

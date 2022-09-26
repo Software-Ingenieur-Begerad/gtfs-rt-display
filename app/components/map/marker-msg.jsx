@@ -1,10 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import {Marker} from 'react-leaflet';
 
-import PopupMsg from './popup-msg';
-import bfly from '../../assets/Logo_SIB_electricindigo.svg';
+import MarkerMsgPlus from './marker-msg-plus';
+
 const MarkerMsg = ({ index,message }) => {
     /*store state*/
     const [ptByIfleet,setPtByIfleet]=useState({});
@@ -22,23 +21,22 @@ const MarkerMsg = ({ index,message }) => {
     useEffect(()=>{
 	getPtByIfleet();
     },[]);
-    const iconBfly = new L.Icon({
-	iconUrl: bfly,
-	iconRetinaUrl: bfly,
-	popupAnchor:  [-0, -0],
-	iconSize: [32,45],
-    });
-    return(
-	<>
-	    <Marker
-		index={index}
-		position={[message.lat,message.lon]}
-		icon={iconBfly}
-	    >
-		<PopupMsg index={index} message={message} ptByIfleet={ptByIfleet} />
-	    </Marker>
-	</>
-    );
+
+    if(message===undefined || message===null
+       || Object.keys(ptByIfleet).length===0){
+	return null;
+    }else{
+	return(
+	    <>
+		<MarkerMsgPlus
+		    index={index}
+		    key={index}
+		    message={message}
+		    ptByIfleet={ptByIfleet}
+		/>
+	    </>
+	);
+    }
 }
 export default MarkerMsg;
 

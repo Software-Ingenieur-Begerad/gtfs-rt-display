@@ -8,10 +8,16 @@ import './map.css';
 import MsgMarker from './marker-msg';
 
 export default function Map({messages}) {
-    const position = [53.2206976, 7.7585528]
+    /*lat and lon of Braunschweig,DE*/
+    const position = [52.26594, 10.52673]
     return (
 	<>
-	    <MapContainer center={position} zoom={6} scrollWheelZoom={false}>
+	    <MapContainer
+		center={position}
+		zoom={5}
+		minZoom={2}
+		scrollWheelZoom={true}
+	    >
 		<TileLayer
 		    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 		    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
