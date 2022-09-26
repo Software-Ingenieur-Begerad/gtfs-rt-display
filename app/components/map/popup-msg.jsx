@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Popup} from 'react-leaflet';
+
+import seconds2dmhs from '../../utils/seconds2dhms';
 const PopupMsg = ({index,message,ptByIfleet}) => {
+    const vehicleAge=seconds2dmhs(Math.round(((Date.now()-message.tsMsgCreationVehicle*1000)/1000).toFixed(0)));
+    const itcsAge=seconds2dmhs(Math.round(((Date.now()-message.tsMsgCreationItcs*1000)/1000).toFixed(0)));
+    const clientAge=seconds2dmhs(Math.round(((Date.now()-message.tsMsgReception*1000)/1000).toFixed(0)));
     return (
 	<>
 	<Popup
 	    index={index}>
 	    id: {message.id} <br/>
 	    vehicle id: {message.vehicleId} <br/>
-	    ts creation vehicle: {message.tsMsgCreationVehicle} <br/>
-	    ts creation ITCS: {message.tsMsgCreationItcs} <br/>
-	    ts reception client; {message.tsMsgReception} <br/>
+	    creation time at vehicle: ts:{message.tsMsgCreationVehicle}, age:{vehicleAge} <br/>
+	    creation time at ITCS: ts:{message.tsMsgCreationItcs}, age:{itcsAge} <br/>
+	    reception time at client: ts:{message.tsMsgReception}, age:{clientAge} <br/>
 	    trip id: {ptByIfleet.trip_id} <br/>
 	    trip name: {ptByIfleet.trip_short_name} <br/>
 	    trip destination: {ptByIfleet.trip_headsign} <br/>
