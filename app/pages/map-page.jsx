@@ -10,7 +10,7 @@ export default function MapPage() {
 	//console.log('getData() start...');
         try {
             /*TODO handle errors: https://www.valentinog.com/blog/await-react/*/
-            let url = 'https://soll.vbn.de/vehicle-positions';
+            let url = 'https://api.entur.io/realtime/v1/gtfs-rt/vehicle-positions';
             //let url = 'http://localhost:8080/vehicle-positions';
             const res = await axios.get(url,
 					{
