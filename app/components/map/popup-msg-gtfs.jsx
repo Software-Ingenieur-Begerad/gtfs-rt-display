@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import {Popup} from 'react-leaflet';
 
 import seconds2dmhs from '../../utils/seconds2dhms';
+import getRouteType from '../../utils/gtfs-route-type';
 
-const PopupMsg = ({index,message}) => {
+const PopupMsgGtfs = ({index,message,ptByIfleet}) => {
     /*get number of ms since epoch*/
     const nowTsMs=Date.now();
     const nowTs=Math.round(nowTsMs/1000);
@@ -22,6 +23,15 @@ const PopupMsg = ({index,message}) => {
 	>
 	    message id: {message.id} <br/>
 	    vehicle id: {message.vehicleId} <br/>
+	    trip id: {ptByIfleet.trip_id} <br/>
+	    trip name: {ptByIfleet.trip_short_name} <br/>
+	    trip destination: {ptByIfleet.trip_headsign} <br/>
+	    route id: {ptByIfleet.route_id} <br/>
+	    route name: {ptByIfleet.route_short_name} <br/>
+	    route type: {ptByIfleet.route_type}({getRouteType(ptByIfleet.route_type)}) <br/>
+	    agency id: {ptByIfleet.agency_id} <br/>
+	    agency name: {ptByIfleet.agency_name} <br/>
+	    agency URL: {ptByIfleet.agency_url} <br/>
 	    lat: {message.lat} <br/>
 	    lon: {message.lon} <br/>
 	    <br/>
@@ -30,9 +40,10 @@ const PopupMsg = ({index,message}) => {
 	</>
     );
 }
-export default PopupMsg;
+export default PopupMsgGtfs;
 
-PopupMsg.propTypes = {
+PopupMsgGtfs.propTypes = {
     index: PropTypes.number,
-    message: PropTypes.object
+    message: PropTypes.object,
+    ptByIfleet: PropTypes.object
 };

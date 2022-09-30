@@ -5,11 +5,14 @@ import {MapContainer,TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'
 import './map.css';
 
-import MsgMarker from './marker-msg';
+import MsgMarkerWithGtfs from './marker-msg-gtfs';
+import MsgMarkerWithoutGtfs from './marker-msg';
 
 export default function Map({messages}) {
     /*lat and lon of Braunschweig,DE*/
     const position = [52.26594, 10.52673]
+    //TODO make this switch available via configuration
+    const hasGtfs = true;
     return (
 	<>
 	    <MapContainer
@@ -25,7 +28,11 @@ export default function Map({messages}) {
 		{
 		    messages.map(function(value,key) {
 			//console.log(`key: ${key}, value: ${value}`);
-			return <MsgMarker key={key} index={key} message={value}/>;
+			if(hasGtfs){
+			    return <MsgMarkerWithGtfs key={key} index={key} message={value}/>;
+			}else{
+			    return <MsgMarkerWithoutGtfs key={key} index={key} message={value}/>;
+			}
                     })
 		}
 	    </MapContainer>

@@ -5,13 +5,12 @@ import {Marker} from 'react-leaflet';
 import PopupMsg from './popup-msg';
 import getIcon from './icon';
 
-const MarkerMsgPlus = ({ index,message,ptByIfleet }) => {
+const MarkerMsgPlus = ({ index,message }) => {
 
-    if(message===undefined || message===null
-       || Object.keys(ptByIfleet).length===0){
+    if(message===undefined || message===null){
 	return null;
     }else{
-	const markerIcon=getIcon(ptByIfleet);
+	const markerIcon=getIcon();
 	if(markerIcon===null){
 	    return null;
 	}else{
@@ -23,7 +22,7 @@ const MarkerMsgPlus = ({ index,message,ptByIfleet }) => {
 		    position={[message.lat,message.lon]}
 		    icon={markerIcon}
 		>
-		    <PopupMsg index={index} message={message} ptByIfleet={ptByIfleet} />
+		    <PopupMsg index={index} message={message} />
 		</Marker>
 	    </>
 	);
@@ -35,6 +34,5 @@ export default MarkerMsgPlus;
 
 MarkerMsgPlus.propTypes = {
     index: PropTypes.number,
-    message: PropTypes.object,
-    ptByIfleet: PropTypes.object
+    message: PropTypes.object
 };
