@@ -42,7 +42,7 @@ export default function MapPage() {
 	/*refresh data periodically*/
 	const intervalCall=setInterval(()=>{
 	    getData();
-	}, 5000);
+	}, 10000);
 	/*TODO adjust interval, make it available via config file*/
 	return ()=>{
 	    /*clean up*/
