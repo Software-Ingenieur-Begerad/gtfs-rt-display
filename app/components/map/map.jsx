@@ -12,7 +12,7 @@ export default function Map({messages}) {
     /*lat and lon of Braunschweig,DE*/
     const position = [52.26594, 10.52673]
     //TODO make this switch available via configuration
-    const hasGtfs = true;
+    const hasGtfs = false;
     return (
 	<>
 	    <MapContainer
