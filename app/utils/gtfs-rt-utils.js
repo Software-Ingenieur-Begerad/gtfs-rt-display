@@ -26,12 +26,15 @@ export default function parseMessages(buffer){
 	    //remove tailing dot
 	    //match a dot when it is followed by a whitespace or the end of the string
 	    /*TODO Is this precaution required?*/
-	    let latFormed = position.latitude === undefined ? -360 : position.latitude.toString().replace(/\.+$/, "");
+	    //TODO Handle error! Placing a decimal point at a fixed place does not work in general!
+	    //let posLat=position.latitude;
+	    //console.log(`getVehPos() posLat:${posLat}`);
+	    //let latFormed = position.latitude === undefined ? -360 : position.latitude.toString().replace(/\.+$/, "");
 	    //console.log(`getVehPos() latFormed:${latFormed}`);
-	    latFormed=charIntoString(latFormed,latFormed.length - 7,'.');
+	    //latFormed=charIntoString(latFormed,latFormed.length - 7,'.');
 	    //console.log(`getVehPos() latFormed:${latFormed}`);
-	    let lonFormed = position.longitude === undefined ? -720 : position.longitude.toString().replace(/\.+$/, "");
-	    lonFormed=charIntoString(lonFormed,lonFormed.length - 7,'.');
+	    //let lonFormed = position.longitude === undefined ? -720 : position.longitude.toString().replace(/\.+$/, "");
+	    //lonFormed=charIntoString(lonFormed,lonFormed.length - 7,'.');
 	    //console.log(`getVehPos() lonFormed:${lonFormed}`);
 	    const now= new Date();
 	    const message={
@@ -52,8 +55,8 @@ export default function parseMessages(buffer){
 		tripId: trip.trip_id === undefined ? -1 : parseInt(trip.trip_id,10) || -2,
 		/*The route_id from the GTFS that this selector refers to.*/
 		routeId: trip.route_id === undefined ? -1 : parseInt(trip.route_id,10) || -2,
-		lat: latFormed,
-		lon: lonFormed,
+		lat: position.latitude,
+		lon: position.longitude,
 	    };
 	    messages.push(message);
 	} else {
