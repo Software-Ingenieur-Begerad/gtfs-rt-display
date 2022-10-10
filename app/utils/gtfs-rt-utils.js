@@ -52,7 +52,8 @@ export default function parseMessages(buffer){
 		/*Internal system identification of the vehicle.*/
 		vehicleId: vehicle.id === undefined ? '' : vehicle.id,
 		/*The trip_id from the GTFS feed that this selector refers to.*/
-		tripId: trip.trip_id === undefined ? -1 : parseInt(trip.trip_id,10) || -2,
+		//TODO How shall duplicate or unavailable trip id's be handles?
+		tripId: trip.trip_id === undefined ? ''+position.latitude+position.longiture : parseInt(trip.trip_id,10) || ''+position.latitude+position.longitude,
 		/*The route_id from the GTFS that this selector refers to.*/
 		routeId: trip.route_id === undefined ? -1 : parseInt(trip.route_id,10) || -2,
 		lat: position.latitude,

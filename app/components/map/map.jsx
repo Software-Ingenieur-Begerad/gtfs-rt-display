@@ -27,11 +27,11 @@ export default function Map({messages}) {
 		/>
 		{
 		    messages.map(function(value,key) {
-			//console.log(`key: ${key}, value: ${value.vehicleId}`);
+			//console.log(`key: ${key}, value: ${JSON.stringify(value)}`);
 			if(hasGtfs){
-			    return <MsgMarkerWithGtfs key={value.vehicleId} index={value.vehicleId} message={value}/>;
+			    return <MsgMarkerWithGtfs key={value.tripId} index={value.vehicleId} message={value}/>;
 			}else{
-			    return <MsgMarkerWithoutGtfs key={value.vehicleId} index={value.vehicleId} message={value}/>;
+			    return <MsgMarkerWithoutGtfs key={value.tripId} index={value.vehicleId} message={value}/>;
 			}
                     })
 		}
