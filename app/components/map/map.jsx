@@ -11,7 +11,7 @@ import MsgMarkerWithoutGtfs from './marker-msg';
 export default function Map({messages}) {
     /*lat and lon of Braunschweig,DE*/
     const position = [52.26594, 10.52673]
-    //TODO make this switch available via configuration
+    //TODO make this switch available via configuration!
     const hasGtfs = false;
     return (
 	<>
@@ -27,11 +27,11 @@ export default function Map({messages}) {
 		/>
 		{
 		    messages.map(function(value,key) {
-			//console.log(`key: ${key}, value: ${value}`);
+			//console.log(`key: ${key}, value: ${value.vehicleId}`);
 			if(hasGtfs){
-			    return <MsgMarkerWithGtfs key={key} index={key} message={value}/>;
+			    return <MsgMarkerWithGtfs key={value.vehicleId} index={value.vehicleId} message={value}/>;
 			}else{
-			    return <MsgMarkerWithoutGtfs key={key} index={key} message={value}/>;
+			    return <MsgMarkerWithoutGtfs key={value.vehicleId} index={value.vehicleId} message={value}/>;
 			}
                     })
 		}

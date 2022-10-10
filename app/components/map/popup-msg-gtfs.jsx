@@ -5,7 +5,7 @@ import {Popup} from 'react-leaflet';
 import seconds2dmhs from '../../utils/seconds2dhms';
 import getRouteType from '../../utils/gtfs-route-type';
 
-const PopupMsgGtfs = ({index,message,ptByIfleet}) => {
+const PopupMsgGtfs = ({message,ptByIfleet}) => {
     /*get number of ms since epoch*/
     const nowTsMs=Date.now();
     const nowTs=Math.round(nowTsMs/1000);
@@ -17,10 +17,7 @@ const PopupMsgGtfs = ({index,message,ptByIfleet}) => {
     const itcsString=itcsDate.toString()
     return (
 	<>
-	<Popup
-	    index={index}
-	    key={index}
-	>
+	<Popup>
 	    message id: {message.id} <br/>
 	    vehicle id: {message.vehicleId} <br/>
 	    trip id: {ptByIfleet.trip_id} <br/>
@@ -43,7 +40,6 @@ const PopupMsgGtfs = ({index,message,ptByIfleet}) => {
 export default PopupMsgGtfs;
 
 PopupMsgGtfs.propTypes = {
-    index: PropTypes.number,
     message: PropTypes.object,
     ptByIfleet: PropTypes.object
 };

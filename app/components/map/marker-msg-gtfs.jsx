@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import MarkerMsgPlus from './marker-msg-plus-gtfs';
 
-const MarkerMsg = ({ index,message }) => {
+const MarkerMsg = ({ message }) => {
     /*store state*/
     const [ptByIfleet,setPtByIfleet]=useState({});
     const getPtByIfleet= async ()=>{
@@ -29,8 +29,6 @@ const MarkerMsg = ({ index,message }) => {
 	return(
 	    <>
 		<MarkerMsgPlus
-		    index={index}
-		    key={index}
 		    message={message}
 		    ptByIfleet={ptByIfleet}
 		/>
@@ -42,6 +40,5 @@ export default MarkerMsg;
 
 
 MarkerMsg.propTypes = {
-    index: PropTypes.number,
     message: PropTypes.object
 };

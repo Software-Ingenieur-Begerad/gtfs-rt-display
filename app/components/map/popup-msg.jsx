@@ -4,7 +4,7 @@ import {Popup} from 'react-leaflet';
 
 import seconds2dmhs from '../../utils/seconds2dhms';
 
-const PopupMsg = ({index,message}) => {
+const PopupMsg = ({message}) => {
     /*get number of ms since epoch*/
     const nowTsMs=Date.now();
     const nowTs=Math.round(nowTsMs/1000);
@@ -16,10 +16,7 @@ const PopupMsg = ({index,message}) => {
     const itcsString=itcsDate.toString()
     return (
 	<>
-	<Popup
-	    index={index}
-	    key={index}
-	>
+	<Popup>
 	    message id: {message.id} <br/>
 	    vehicle id: {message.vehicleId} <br/>
 	    lat: {message.lat} <br/>
@@ -33,6 +30,5 @@ const PopupMsg = ({index,message}) => {
 export default PopupMsg;
 
 PopupMsg.propTypes = {
-    index: PropTypes.number,
     message: PropTypes.object
 };

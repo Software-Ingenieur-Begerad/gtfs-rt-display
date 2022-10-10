@@ -10,15 +10,15 @@ export default function MapPage() {
 	//console.log('getData() start...');
         try {
             /*TODO handle errors: https://www.valentinog.com/blog/await-react/*/
+	    //TODO Make fields available via configuration!
             let url = 'https://api.entur.io/realtime/v1/gtfs-rt/vehicle-positions';
-            //let url = 'http://localhost:8080/vehicle-positions';
             const res = await axios.get(url,
 					{
 					    responseType: 'arraybuffer'
 					    //responseType: 'blob'
 					});
-	    //TODO remove debugging
             if(res.data){
+		//TODO remove debugging
                 //console.log('getVehPos() res available');
 		/*parse messages*/
 		const messages = parseMessages(res.data);
@@ -42,7 +42,7 @@ export default function MapPage() {
 	/*refresh data periodically*/
 	const intervalCall=setInterval(()=>{
 	    getData();
-	}, 10000);
+	}, 5000);
 	/*TODO adjust interval, make it available via config file*/
 	return ()=>{
 	    /*clean up*/
