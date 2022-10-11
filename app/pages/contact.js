@@ -7,18 +7,16 @@ const Contact = () => {
             <h2>About this website</h2>
 
             <p>
-        For questions about this website please do not hesitate to reach out to{' '}
-                <a href="mailto:dialog@swingbe.de">Software Ingenieur Begerad</a>.
+		For questions about this website please do not hesitate to reach out to dialog (at) swingbe (dot) de.
             </p>
             <p>
-        Source code has been made public on{' '}
+		Source code has been made public on{' '}
                 <a
                     href="https://github.com/Software-Ingenieur-Begerad/gtfs-rt-display"
                     target="_blank"
                 >
-          GitHub
-                </a>
-        .
+		    GitHub
+                </a>.
             </p>
             <h2>Imprint</h2>
             <address>
