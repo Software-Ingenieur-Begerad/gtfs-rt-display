@@ -48,14 +48,14 @@ export default function parseMessages(buffer){
 		/*ts msg reception at client in ms and convert to s*/
 		tsMsgReception: Math.floor(now.getTime() / 1000),
 		/*Feed-unique identifier for this entity. The ids are used only to provide incrementality support.*/
-		id: entity.id === undefined ? '' : entity.id,
+		id: entity.id === undefined ? 'unavailable' : entity.id,
 		/*Internal system identification of the vehicle.*/
-		vehicleId: vehicle.id === undefined ? '' : vehicle.id,
+		vehicleId: vehicle.id === undefined ? 'unavailable' : vehicle.id,
 		/*The trip_id from the GTFS feed that this selector refers to.*/
 		//TODO How shall duplicate or unavailable trip id's be handles?
-		tripId: trip.trip_id === undefined ? ''+position.latitude+position.longiture : parseInt(trip.trip_id,10) || ''+position.latitude+position.longitude,
+		tripId: trip.trip_id === undefined ? 'unavailable' : trip.trip_id,
 		/*The route_id from the GTFS that this selector refers to.*/
-		routeId: trip.route_id === undefined ? -1 : parseInt(trip.route_id,10) || -2,
+		routeId: trip.route_id === undefined ? 'unavailable' : trip.route_id,
 		lat: position.latitude,
 		lon: position.longitude,
 	    };
