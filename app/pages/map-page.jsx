@@ -11,7 +11,7 @@ export default function MapPage() {
         try {
             /*TODO handle errors: https://www.valentinog.com/blog/await-react/*/
 	    //TODO Make fields available via configuration!
-            let url = 'https://api.entur.io/realtime/v1/gtfs-rt/vehicle-positions';
+            let url = 'https://soll.vbn.de/vehicle-positions';
             const res = await axios.get(url,
 					{
 					    responseType: 'arraybuffer'
