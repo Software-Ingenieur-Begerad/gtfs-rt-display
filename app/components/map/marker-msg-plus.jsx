@@ -8,13 +8,16 @@ import getIcon from './icon';
 const MarkerMsgPlus = ({ message }) => {
 
     if(message===undefined || message===null){
+	console.error('message undefined or null');
 	return null;
     }else{
+	//console.log(`MarkerMsgPlus: tripId: ${message.tripId}`);
 	const markerIcon=getIcon();
 	if(markerIcon===null){
+	    console.error('MarkerMsgPlus: icon null');
 	    return null;
 	}else{
-	return(
+	    return(
 	    <>
 		<Marker
 		    position={[message.lat,message.lon]}

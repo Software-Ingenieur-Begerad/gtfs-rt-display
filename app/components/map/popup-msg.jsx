@@ -19,6 +19,8 @@ const PopupMsg = ({message}) => {
 	<Popup>
 	    message id: {message.id} <br/>
 	    vehicle id: {message.vehicleId} <br/>
+	    trip id: {message.tripId} <br/>
+	    route id: {message.routeId} <br/>
 	    lat: {message.lat} <br/>
 	    lon: {message.lon} <br/>
 	    <br/>

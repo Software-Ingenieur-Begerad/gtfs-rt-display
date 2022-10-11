@@ -5,8 +5,10 @@ import MarkerMsgPlus from './marker-msg-plus';
 
 const MarkerMsg = ({ message }) => {
     if(message===undefined || message===null){
+	console.error('message undefined or null');
 	return null;
     }else{
+	//console.log(`MarkerMsg: tripId: ${message.tripId}`);
 	return(
 	    <>
 		<MarkerMsgPlus

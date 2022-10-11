@@ -27,7 +27,7 @@ export default function Map({messages}) {
 		/>
 		{
 		    messages.map(function(value,key) {
-			//console.log(`key: ${key}, value: ${JSON.stringify(value)}`);
+			//console.log(`key: ${key}, tripId: ${value.tripId}`);
 			if(hasGtfs){
 			    return <MsgMarkerWithGtfs key={value.tripId} index={value.vehicleId} message={value}/>;
 			}else{
