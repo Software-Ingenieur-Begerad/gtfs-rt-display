@@ -11,12 +11,17 @@ export default function MapPage() {
         try {
             /*TODO handle errors: https://www.valentinog.com/blog/await-react/*/
 	    //TODO Make fields available via configuration!
-            let url = 'https://api.entur.io/realtime/v1/gtfs-rt/vehicle-positions';
-            const res = await axios.get(url,
-					{
-					    responseType: 'arraybuffer'
-					    //responseType: 'blob'
-					});
+            const url = 'https://data.bus-data.dft.gov.uk/api/v1/gtfsrtdatafeed/?boundingBox=51.401,51.509,0.01,0.201&routeId=45,26&startTimeAfter=1609518528&startTimeBefore=1609518528';
+
+	    const token = 'f5e9ef10f43095ce597cfa4b5c3b742475984b68';
+	    const config = {
+		headers: {
+		    authorization: `${token}`
+		},
+		responseType: 'arraybuffer'
+		//responseType: 'blob'
+	    };
+	    const res = await axios.get(url,config);
             if(res.data){
 		//TODO remove debugging
                 //console.log('getVehPos() res available');
